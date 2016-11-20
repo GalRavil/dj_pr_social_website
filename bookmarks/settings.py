@@ -109,3 +109,21 @@ from django.core.urlresolvers import reverse_lazy
 LOGIN_REDIRECT_URL = reverse_lazy('dashboard')  # which URL to redirect after login
 LOGIN_URL = reverse_lazy('login')
 LOGOUT_URL = reverse_lazy('logout')
+
+
+# write emails to the standard output
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# sending e-mails
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_HOST_USER = 'your_account@gmail.com'
+# EMAIL_HOST_PASSWORD = 'your_password'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+
+# EMAIL_HOST : The SMTP server host. Default localhost .
+# EMAIL_PORT : The SMTP port Default 25.
+# EMAIL_HOST_USER : Username for the SMTP server.
+# EMAIL_HOST_PASSWORD : Password for the SMTP server.
+# EMAIL_USE_TLS : Whether to use a TLS secure connection.
+# EMAIL_USE_SSL : Whether to use an implicit TLS secure connection.
