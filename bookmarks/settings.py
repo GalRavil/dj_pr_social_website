@@ -130,3 +130,10 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # EMAIL_HOST_PASSWORD : Password for the SMTP server.
 # EMAIL_USE_TLS : Whether to use a TLS secure connection.
 # EMAIL_USE_SSL : Whether to use an implicit TLS secure connection.
+
+
+# social-auth settings
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'account.authentication.EmailAuthBackend',
+)
