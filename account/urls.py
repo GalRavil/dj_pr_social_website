@@ -12,4 +12,9 @@ urlpatterns = [
         name='logout-then-login'),
 
     url(r'^$', views.dashboard, name='dashboard'),
+
+    url(r'^password-change/$', 'django.contrib.auth.views.password_change',
+        name='password_change'),
+    url(r'^password-change/done/$', 'django.contrib.auth.views.password_change_done',
+        name='password_change_done'),
 ]
