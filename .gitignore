@@ -1,5 +1,5 @@
 .idea/
 *.pyc
-account/migrations
+*/migrations
 /db.sqlite3
 /media/
