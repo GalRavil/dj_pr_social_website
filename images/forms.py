@@ -29,7 +29,7 @@ class ImageCreateForm(forms.ModelForm):
         image = super(ImageCreateForm, self).save(commit=False)
         image_url = self.cleaned_data['url']
         image_name = '{}.{}'.format(slugify(image.title),
-                                    image_url.rsplit(',', 1)[1].lower())
+                                    image_url.rsplit('.', 1)[1].lower())
         # download image from given url
         response = request.urlopen(image_url)
         image.image.save(image_name,
