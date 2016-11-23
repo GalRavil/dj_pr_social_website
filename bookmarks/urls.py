@@ -18,8 +18,10 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    url(r'^account/', include('account.urls')),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^account/', include('account.urls')),
+    url(r'^images/', include('images.urls', namespace='images')),
+
 
     url('social-auth/', include('social.apps.django_app.urls', namespace='social')),
 ]

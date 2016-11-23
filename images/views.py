@@ -9,7 +9,7 @@ from .forms import ImageCreateForm
 def image_create(request):
     if request.method == 'POST':
         form = ImageCreateForm(data=request.POST)
-        
+
         if form.is_valid():
             cd = form.cleaned_data
             new_item = form.save(commit=False)
