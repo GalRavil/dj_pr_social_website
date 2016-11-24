@@ -8,3 +8,4 @@ python3-openid==3.0.10
 requests==2.12.1
 requests-oauthlib==0.7.0
 six==1.10.0
+sorl-thumbnail==12.3
