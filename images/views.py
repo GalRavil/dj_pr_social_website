@@ -1,6 +1,7 @@
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
 
@@ -63,3 +64,30 @@ def image_like(request):
             pass
     return JsonResponse({'status': 'ok'})
 
+
+# when user initially loads loads the image list page, 1st page will be displayed.
+# when he scroll to the bottom of the page, following page of images will be loaded via AJAX
+@login_required
+def image_list(request):
+    images = Image.objects.all()
+    paginator = Paginator(images, 10)
+    page = request.GET.get('page')
+
+    try:
+        images = paginator.page(page)
+    except PageNotAnInteger:
+        # if page is not an integer deliver first page
+        images = paginator.page(1)
+    except EmptyPage:
+        if request.is_ajax():
+            # if ajax and page is out of range return an empty page
+            return HttpResponse('')
+        # if page is out of range - deliver last page
+        images = paginator.page(paginator.num_pages)
+    if request.is_ajax():
+        return render(request, 'images/image/list_ajax.html',
+                      {'section': 'images',
+                       'images': images})
+    return render(request, 'images/image/list.html',
+                  {'section': 'images',
+                   'images': images})
