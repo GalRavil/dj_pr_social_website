@@ -55,14 +55,14 @@ def image_like(request):
     if image_id and action:
         try:
             image = Image.objects.get(id=image_id)
-            if action == 'Like':
+            if action == 'like':
                 image.users_like.add(request.user)
             else:
                 image.users_like.remove(request.user)
             return JsonResponse({'status': 'ok'})
         except:
             pass
-    return JsonResponse({'status': 'ok'})
+    return JsonResponse({'status': 'ko'})
 
 
 # when user initially loads loads the image list page, 1st page will be displayed.
