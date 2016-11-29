@@ -6,6 +6,7 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, get_object_or_404
 from django.views.decorators.http import require_POST
 
+from actions.utils import create_action
 from common.decorators import ajax_required
 from .forms import LoginForm, UserRegistrationForm, \
     UserEditForm, ProfileEditForm
@@ -49,6 +50,8 @@ def register(request):
             new_user.set_password(user_form.cleaned_data['password'])
             # save the User object
             new_user.save()
+            # show action in activity stream
+            create_action(new_user, 'has created an account')
             # create the user profile
             profile = Profile.objects.create(user=new_user)
             return render(request,
@@ -111,6 +114,8 @@ def user_follow(request):
             if action == 'follow':
                 Contact.objects.get_or_create(user_from=request.user,
                                               user_to=user)
+                # show action in activity stream
+                create_action(request.user, 'is following', user)
             else:
                 Contact.objects.filter(user_from=request.user,
                                        user_to=user).delete()
